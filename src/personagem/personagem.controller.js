@@ -7,7 +7,17 @@ const service = require('./personagem.service')
 }
 
 async function readById(req,res){
-    
+    const id = req.params.id
+
+    const personagem = await service.readById(id)
+
+    if(!personagem){
+        return res.status(404).send('personagem não encontrado')
+    }
+
+    res.send(personagem)
+
+
 }
 
 function create(req,res){
