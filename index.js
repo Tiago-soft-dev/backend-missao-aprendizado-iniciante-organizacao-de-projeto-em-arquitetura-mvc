@@ -4,7 +4,7 @@ const { MongoClient, ObjectId } = require('mongodb')
 
 //dados de configuracao do servidor
 const dbUrl = process.env.DATABASE_URL
-const dbName = 'mongodb-intro-e-implementacao'
+const dbName = process.env.DATABASE_NAME
 
 async function main(){
 
