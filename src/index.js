@@ -2,6 +2,7 @@ require('dotenv').config()
 const express=require('express')
 //const { MongoClient, ObjectId } = require('mongodb')
 const { connectToDataBase } = require('./db/database-connection')
+const personagemRouter = require ('./personagem/personagem.router')
 
 
 
@@ -15,6 +16,7 @@ const app=express()
 
 //middlewares
 app.use(express.json()) //express usando json
+app.use('/personagem', personagemRouter)
 
 
 /*
