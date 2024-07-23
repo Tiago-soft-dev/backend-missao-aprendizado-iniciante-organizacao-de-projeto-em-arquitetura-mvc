@@ -24,10 +24,15 @@ function create(novoPersonagem){
     return getCollection().insertOne(novoPersonagem)
 }
 
-function updateById(){
+function updateById(id, novoPersonagem){
+    return getCollection().updateOne(
+       { _id: new ObjectId(id)},
+        {$set: novoPersonagem}
+    )
 }
 
-function deleleById(){
+function deleleById(id){
+    return getCollection().deleteOne({_id: new ObjectId(id)})
 }
 
 module.exports = {

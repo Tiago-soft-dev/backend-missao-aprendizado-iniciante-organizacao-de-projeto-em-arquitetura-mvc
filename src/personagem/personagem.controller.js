@@ -28,12 +28,24 @@ async function create(req,res){
     res.status(201).send(novoPersonagem)
     }
 
-function updateById(req,res){
-    res.send('update by id')
+async function updateById(req,res){
+    const id = req.params.id
+
+    const novoPersonagem = req.body
+    
+    if(!novoPersonagem || !novoPersonagem){
+        res.status(400).send('corpo da requisição inválido')
+    }
+
+    await service.updateById(id, novoPersonagem)
+
+    res.status(201).send(novoPersonagem)
 }
 
-function deleleById(req,res){
-    res.send('delete by id')
+async function deleleById(req,res){
+    const id = req.params.id
+    await service.deleleById(id)
+    res.status(201).send('personagem removido com sucesso')
 }
 
 module.exports = {
