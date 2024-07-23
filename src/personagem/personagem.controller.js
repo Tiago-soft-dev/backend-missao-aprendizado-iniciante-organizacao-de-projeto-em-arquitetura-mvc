@@ -1,9 +1,13 @@
-function readAll(req,res){
-    res.send('readAll')
+const { Collection } = require("mongodb")
+const service = require('./personagem.service')
+
+ async function readAll(req,res){
+    const personagens =  await service.readAll()
+    res.send(personagens)
 }
 
-function readById(req,res){
-    res.send('read by id')
+async function readById(req,res){
+    
 }
 
 function create(req,res){

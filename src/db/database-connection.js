@@ -4,15 +4,22 @@ const { MongoClient } = require("mongodb");
 const dbUrl = process.env.DATABASE_URL
 const dbName = process.env.DATABASE_NAME
 
-async function connectToDataBase(){
-    //conexao do servidor    
 const client = new MongoClient(dbUrl)
+
+
+
+async function connectToDataBase(){
+//conexao do servidor    
 console.log('Conectando ao BD');
 await client.connect()
 console.log('BD conectado');
-const db = client.db(dbName)
+}
+
+function getDatabase(){
+    return client.db(dbName)
 }
 
 module.exports = {
-    connectToDataBase
+    connectToDataBase,
+    getDatabase
 }
