@@ -1,27 +1,23 @@
 require('dotenv').config()
 const express=require('express')
-const { MongoClient, ObjectId } = require('mongodb')
+//const { MongoClient, ObjectId } = require('mongodb')
+const { connectToDataBase } = require('./db/database-connection')
 
-//dados de configuracao do servidor
-const dbUrl = process.env.DATABASE_URL
-const dbName = process.env.DATABASE_NAME
+
 
 async function main(){
+// FIX: utilizar o connectToDataBase e receber o BD
+await connectToDataBase()
 
-//conexao do servidor    
-const client = new MongoClient(dbUrl)
-console.log('Conectando ao BD');
-await client.connect()
-console.log('BD conectado');
-const db = client.db(dbName)
-const collection = db.collection('personagem')
+//const collection = db.collection('personagem')
 
 const app=express()
-app.use(express.json())
+
+//middlewares
+app.use(express.json()) //express usando json
 
 
-const lista = ['Java', 'Kotlin', 'Android']
-
+/*
 //endpoint read all get
 app.get('/personagem', async (req,res)=>{
     const itens = await collection.find().toArray()
@@ -91,7 +87,7 @@ app.delete('/personagem/:id', async (req,res)=>{
     await collection.deleteOne({_id: new ObjectId(id)})
     res.send('Item deletado com sucesso! ')
 })
-
+*/
 app.listen(3000, ()=>console.log('servidor online'))
 }
 main()
