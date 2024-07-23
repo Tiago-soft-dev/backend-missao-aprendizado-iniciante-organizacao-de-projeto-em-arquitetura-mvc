@@ -14,15 +14,19 @@ async function readById(req,res){
     if(!personagem){
         return res.status(404).send('personagem não encontrado')
     }
-
     res.send(personagem)
-
-
 }
 
-function create(req,res){
-    res.send('create')
-}
+async function create(req,res){
+    const novoPersonagem = req.body
+
+    if(!novoPersonagem || !novoPersonagem.nome){
+        return res.status(400).send('corpo da requisição inválido')
+    }
+
+    await service.create(novoPersonagem)
+    res.status(201).send(novoPersonagem)
+    }
 
 function updateById(req,res){
     res.send('update by id')
